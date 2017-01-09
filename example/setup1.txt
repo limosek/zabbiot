@@ -1,0 +1,10 @@
+This is example of json file to connect to wifi "test" with password
+"trest" using static ip 1.2.3.4
+
+------ cut here ------
+{
+  "ssid": "test",
+  "secret": "trest",
+  "ip": "1.2.3.4",
+  "prefix": 24
+}

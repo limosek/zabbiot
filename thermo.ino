@@ -63,7 +63,14 @@ bool thermoRead() {
   PRINTln();
 }
 
-bool thermoStop() {
+bool thermoLoopStart() {
+ while (thermoNextDevice()) {
+    thermoRead();
+    PRINTf("Got value %f from device %s\n", Thermo_value, devToStr(Thermo_device));
+  }
+}
+
+bool thermoLoopEnd() {
   // Probably nothing. Maybe turn wire off
 }
 

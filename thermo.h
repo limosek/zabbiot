@@ -13,3 +13,8 @@ bool thermoRead();
 
 bool thermoStop();
 
+
+bool thermoLoopStart();
+
+bool thermoLoopEnd();
+

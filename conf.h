@@ -12,9 +12,13 @@ struct EEPROM_CONFIG {
   char secret[64];
   byte prefix;
   bool dhcp;
+  IPAddress zabbix_server;
+  word zabbix_port;
+  char hostname[32];
   IPAddress ip;
   IPAddress gw;
   IPAddress dns;
+  char http_uri[64];
 } Config;
 
 bool loadConfig();

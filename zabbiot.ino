@@ -23,6 +23,10 @@
 #include "prov.h"
 #include "conf.h"
 #include "thermo.h"
+#include "zabbix.h"
+#include "http.h"
+
+WiFiClient zClient;
 
 // Reset function
 void (*Reset)(void) = 0;
@@ -34,17 +38,23 @@ void setup() {
     delay(1000);
     Reset();
   } else {
-
+    thermoSetup();
+    zabbixSetup();
+    httpSetup();
   }
 }
 
 void loop() {
-  thermoSetup();
-  while (thermoNextDevice()) {
-    thermoRead();
-    PRINTf("Got value %f from device %s\n", Thermo_value, devToStr(Thermo_device));
-  }
-  thermoStop();
+  PRINTln("Global loop start");
+  httpLoopStart();
+  zabbixLoopStart();
+  thermoLoopStart();
+  
+  thermoLoopEnd();
+  zabbixLoopEnd();
+  httpLoopEnd();
+  PRINTf("Global loop end, sleeping %d seconds.\n",Config.interval);
+  SLEEP(Config.interval);
 }
 
 

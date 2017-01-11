@@ -11,6 +11,8 @@
 #define CONFIG_START 0
 #define CONFIG_VERSION "zoT"
 
+#define ZABBIX_TIMEOUT 1000
+
 /*
    Debug variables
 */
@@ -35,4 +37,11 @@
 #define PRINTf(...)
 #define CLOSELOG
 #endif
+
+/*
+   Sleep function
+*/
+//#define SLEEP(s) for (word si=1;si<s;si++) delay(1000)  // Standard delay
+#define SLEEP(s) ESP.deepSleep(s * 1000 * 1000); // Optimized for low power on ESP
+
 
